@@ -57,7 +57,7 @@ public class MainMenu {
 					UpdateProductMenu.run(sc);
 					continue;
 				case 7:
-					System.out.println("Not implemented yet");
+					DeleteProductMenu.run(sc);
 					continue;
 				case 8:
 					return; // Return to login menu

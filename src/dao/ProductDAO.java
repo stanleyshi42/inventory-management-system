@@ -123,16 +123,33 @@ public class ProductDAO {
 			preparedStatement.setString(3, name);
 			preparedStatement.setInt(4, id);
 			preparedStatement.executeUpdate();
-			
+
 			return true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 
 	}
 
 	// Delete queries
+	public static boolean deleteProduct(int id) {
+
+		try {
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
+			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM product WHERE id = ?");
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
 }
