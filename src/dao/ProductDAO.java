@@ -34,6 +34,7 @@ public class ProductDAO {
 
 	// Read queries
 	public static ArrayList<Product> getAllProducts() {
+
 		ArrayList<Product> products = new ArrayList<>();
 
 		try {
@@ -57,6 +58,7 @@ public class ProductDAO {
 	}
 
 	public static Product getProduct(String name) {
+
 		Product product = null;
 
 		try {
@@ -81,6 +83,7 @@ public class ProductDAO {
 	}
 
 	public static Product getProduct(int id) {
+
 		Product product = null;
 
 		try {
@@ -103,4 +106,33 @@ public class ProductDAO {
 		return product;
 
 	}
+
+	// Update queries
+	public static boolean updateProduct(int id, float price, int quantity, String name) {
+
+		try {
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
+			String query = """
+					UPDATE product
+					SET price = ?, quantity = ?, name = ?
+					WHERE id = ?
+					""";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setFloat(1, price);
+			preparedStatement.setInt(2, quantity);
+			preparedStatement.setString(3, name);
+			preparedStatement.setInt(4, id);
+			preparedStatement.executeUpdate();
+			
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+
+	}
+
+	// Delete queries
 }

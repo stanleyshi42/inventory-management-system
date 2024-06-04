@@ -54,7 +54,7 @@ public class MainMenu {
 					AddProductMenu.run(sc);
 					continue;
 				case 6:
-					System.out.println("Not implemented yet");
+					UpdateProductMenu.run(sc);
 					continue;
 				case 7:
 					System.out.println("Not implemented yet");
