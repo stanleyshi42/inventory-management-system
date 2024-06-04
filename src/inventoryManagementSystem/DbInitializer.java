@@ -1,13 +1,9 @@
 package inventoryManagementSystem;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import model.*;
 
-import model.Product;
 
 public class DbInitializer {
 
@@ -15,20 +11,22 @@ public class DbInitializer {
 	final static String user = "root";
 	final static String password = "root";
 
+	// Delete and set up all tables
 	public static void init() {
 		initProductTable();
+		initUserTable();
+		initSaleTable();
 	}
 
-	// Creates and populates the product table
-	public static void initProductTable() {
+	private static void initProductTable() {
 
 		try {
 			Connection connection = DriverManager.getConnection(url, user, password);
 
 			// Create table
 			Statement statement = connection.createStatement();
-
-			statement.execute("DROP TABLE IF EXISTS product");
+			
+			statement.execute("DROP TABLE IF EXISTS product"); //TODO delete
 
 			statement.execute("""
 					CREATE TABLE IF NOT EXISTS product (
@@ -40,7 +38,7 @@ public class DbInitializer {
 					)
 					""");
 
-			// Insert data into table
+			// Insert into table
 			ArrayList<Product> products = new ArrayList<>();
 			products.add(new Product(0, 6.79f, 154, "Coffee Mug", "Big coffee mug, 16oz, ideal for coffee and tea. Fits most coffee machines. For all hot and cold beverages"));
 			products.add(new Product(0, 39.99f, 42, "6 Pack Towels", "The pack comprises of 6 pool/gym/bath towels each measuring 24 by 48 inches"));
@@ -56,6 +54,64 @@ public class DbInitializer {
 				preparedStatement.addBatch();
 			}
 			preparedStatement.executeBatch();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void initUserTable() {
+		
+		try {
+			Connection connection = DriverManager.getConnection(url, user, password);
+			Statement statement = connection.createStatement();
+
+			statement.execute("DROP TABLE IF EXISTS user");
+
+			statement.execute("""
+					CREATE TABLE IF NOT EXISTS user (
+						id INT PRIMARY KEY AUTO_INCREMENT,
+						username VARCHAR(255) NOT NULL,
+						password VARCHAR(255) NOT NULL,
+						role VARCHAR(255) NOT NULL
+					)
+					""");
+
+			ArrayList<User> users = new ArrayList<>();
+			users.add(new User(0, "admin", "admin", "admin"));
+			users.add(new User(0, "user", "user", "user"));
+
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (username, password, role) VALUES (?, ?, ?)");
+			for (int i = 0; i < users.size(); i++) {
+				preparedStatement.setString(1, users.get(i).username);
+				preparedStatement.setString(2, users.get(i).password);
+				preparedStatement.setString(3, users.get(i).role);
+				preparedStatement.addBatch();
+			}
+			preparedStatement.executeBatch();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void initSaleTable() {
+
+		try {
+			Connection connection = DriverManager.getConnection(url, user, password);
+
+			Statement statement = connection.createStatement();
+
+			statement.execute("DROP TABLE IF EXISTS sale");
+
+			statement.execute("""
+					CREATE TABLE IF NOT EXISTS sale (
+						id INT PRIMARY KEY AUTO_INCREMENT,
+						product_id INT NOT NULL,
+						quantity VARCHAR(255) NOT NULL,
+						timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
+					)
+					""");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
