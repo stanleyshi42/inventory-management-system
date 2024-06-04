@@ -39,10 +39,11 @@ public class DbInitializer {
 
 			// Insert into table
 			ArrayList<Product> products = new ArrayList<>();
-			products.add(new Product(0, 6.79f, 154, "Coffee Mug"));
-			products.add(new Product(0, 39.99f, 42, "6 Pack Towels"));
-			products.add(new Product(0, 34.00f, 36, "Camping Chair"));
-			products.add(new Product(0, 25.95f, 20, "Electric Kettle"));
+			products.add(new Product(0, 699.99f, 24, "Computer"));
+			products.add(new Product(0, 85.99f, 42, "Monitor"));
+			products.add(new Product(0, 34.00f, 57, "Mouse"));
+			products.add(new Product(0, 59.89f, 20, "Keyboard"));
+			products.add(new Product(0, 45.59f, 20, "RAM"));
 
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("INSERT INTO product (price, quantity, name) VALUES (?, ?, ?)");

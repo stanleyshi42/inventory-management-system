@@ -14,7 +14,7 @@ public class SearchProductMenu {
 			String input = sc.nextLine();
 
 			Product result;
-			if (isInteger(input))
+			if (Helper.isInteger(input))
 				result = ProductDAO.getProduct(Integer.parseInt(input));
 			else
 				result = ProductDAO.getProduct(input);
@@ -33,12 +33,4 @@ public class SearchProductMenu {
 		}
 	}
 
-	static boolean isInteger(String str) {
-		try {
-			Integer.parseInt(str);
-			return true;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-	}
 }

@@ -3,19 +3,17 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import menu.Helper;
 import model.Product;
 
 public class ProductDAO {
 
-	final static String DB_URL = "jdbc:mysql://localhost:3306/inventory_management";
-	final static String DB_USER = "root";
-	final static String DB_PASSWORD = "root";
-
+	// Read queries
 	public static ArrayList<Product> getAllProducts() {
 		ArrayList<Product> products = new ArrayList<>();
 
 		try {
-			Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM product");
 
@@ -39,7 +37,7 @@ public class ProductDAO {
 		Product product = null;
 
 		try {
-			Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			PreparedStatement preparedstatement = connection.prepareStatement("SELECT * FROM product WHERE name = ?");
 			preparedstatement.setString(1, name);
 			ResultSet rs = preparedstatement.executeQuery();
@@ -64,7 +62,7 @@ public class ProductDAO {
 		Product product = null;
 
 		try {
-			Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			PreparedStatement preparedstatement = connection.prepareStatement("SELECT * FROM product WHERE id = ?");
 			preparedstatement.setInt(1, id);
 			ResultSet rs = preparedstatement.executeQuery();
