@@ -10,9 +10,7 @@ import model.*;
 
 public class MainMenu {
 
-	Scanner sc = new Scanner(System.in);
-
-	private void printProducts() {
+	static private void printProducts() {
 		ArrayList<Product> products = ProductDAO.getAllProducts();
 
 		for (Product p : products) {
@@ -20,7 +18,7 @@ public class MainMenu {
 		}
 	}
 
-	private void adminMenuLoop(User user) {
+	static void adminMenuLoop(Scanner sc, User user) {
 		// TODO
 		System.out.println("ADMIN MODE");
 		while (true) {
@@ -32,7 +30,7 @@ public class MainMenu {
 		}
 	}
 
-	private void userMenuLoop(User user) {
+	static void userMenuLoop(Scanner sc, User user) {
 
 		System.out.println("Welcome " + user.username);
 		while (true) {
@@ -74,35 +72,5 @@ public class MainMenu {
 		}
 	}
 
-	private void loginMenu() {
-
-		while (true) {
-			try {
-				System.out.println("~~~Inventory Management System 9000~~~");
-				System.out.println("Username:");
-				String username = sc.nextLine();
-
-				System.out.println("Password:");
-				String password = sc.nextLine();
-
-				// Authenticate and log in
-				if (UserDAO.authenticateUser(username, password)) {
-					User user = UserDAO.getUser(username);
-					if (user != null && user.role.equals("user")) {
-						userMenuLoop(user);
-					} else if (user != null && user.role.equals("admin")) {
-						adminMenuLoop(user);
-					}
-				} else
-					System.out.println("Login failed");
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void run() {
-		loginMenu();
-	}
+	
 }
