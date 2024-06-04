@@ -6,9 +6,9 @@ import dao.UserDAO;
 import model.User;
 
 public class LoginMenu {
-	
+
 	public static void run() {
-		
+
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			try {
@@ -22,11 +22,8 @@ public class LoginMenu {
 				// Authenticate and log in
 				if (UserDAO.authenticateUser(username, password)) {
 					User user = UserDAO.getUser(username);
-					if (user != null && user.role.equals("user")) {
-						MainMenu.userMenuLoop(sc, user);
-					} else if (user != null && user.role.equals("admin")) {
-						MainMenu.adminMenuLoop(sc, user);
-					}
+					if (user != null && user.role.equals("user"))
+						MainMenu.run(sc, user);
 				} else
 					System.out.println("Login failed");
 
@@ -35,5 +32,5 @@ public class LoginMenu {
 			}
 		}
 	}
-	
+
 }
