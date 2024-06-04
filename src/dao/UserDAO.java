@@ -27,7 +27,6 @@ public class UserDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 
 		return null;
@@ -48,7 +47,6 @@ public class UserDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 
 		return false;

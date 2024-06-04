@@ -17,7 +17,8 @@ public class AddSaleMenu {
 			int quantityInput = sc.nextInt();
 			sc.nextLine();
 			
-			SaleDAO.addSale(idInput, quantityInput);
+			if(SaleDAO.addSale(idInput, quantityInput))
+				System.out.println("Sale successfully recorded");
 
 			System.out.println("Hit enter to return");
 			sc.nextLine();

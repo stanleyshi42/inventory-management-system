@@ -2,13 +2,15 @@ package inventoryManagementSystem;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import menu.Helper;
 import model.*;
 
 public class DbInitializer {
-
-	final static String url = "jdbc:mysql://localhost:3306/inventory_management";
-	final static String user = "root";
-	final static String password = "root";
+	
+	public static void main(String[] args) {
+		init();
+	}
 
 	// Delete and set up all tables
 	public static void init() {
@@ -20,9 +22,7 @@ public class DbInitializer {
 	private static void initProductTable() {
 
 		try {
-			Connection connection = DriverManager.getConnection(url, user, password);
-
-			// Create table
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 
 			statement.execute("DROP TABLE IF EXISTS product"); // TODO delete
@@ -37,7 +37,6 @@ public class DbInitializer {
 					)
 					""");
 
-			// Insert into table
 			ArrayList<Product> products = new ArrayList<>();
 			products.add(new Product(0, 699.99f, 24, "Computer"));
 			products.add(new Product(0, 85.99f, 42, "Monitor"));
@@ -63,7 +62,7 @@ public class DbInitializer {
 	private static void initUserTable() {
 
 		try {
-			Connection connection = DriverManager.getConnection(url, user, password);
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 
 			statement.execute("DROP TABLE IF EXISTS user");
@@ -98,8 +97,7 @@ public class DbInitializer {
 	private static void initSaleTable() {
 
 		try {
-			Connection connection = DriverManager.getConnection(url, user, password);
-
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 
 			statement.execute("DROP TABLE IF EXISTS sale");
