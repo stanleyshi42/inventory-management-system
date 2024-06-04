@@ -3,8 +3,9 @@ package inventoryManagementSystem;
 public class Main {
 
 	public static void main(String[] args) {
-		DbInitializer.initProductTable();
-
+		DbInitializer.init();
+		MainMenu menu = new MainMenu();
+		menu.run();
 	}
 
 }
