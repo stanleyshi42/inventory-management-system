@@ -19,12 +19,17 @@ public class MainMenu {
 	}
 
 	static void adminMenuLoop(Scanner sc, User user) {
+
 		// TODO
 		System.out.println("ADMIN MODE");
 		while (true) {
-			System.out.println("1. ");
-			System.out.println("2. ");
-			System.out.println("3. ");
+			System.out.println("1. View products");
+			System.out.println("2. Search products");
+			System.out.println("3. Record sale");
+			System.out.println("4. Add product");
+			System.out.println("5. Update product");
+			System.out.println("6. Delete product");
+			System.out.println("7. Logout");
 
 			System.exit(0);
 		}
@@ -35,7 +40,7 @@ public class MainMenu {
 		System.out.println("Welcome " + user.username);
 		while (true) {
 			System.out.println("1. View products");
-			System.out.println("2. Add products");
+			System.out.println("2. Search products");
 			System.out.println("3. Record sale");
 			System.out.println("4. Logout");
 
@@ -43,13 +48,15 @@ public class MainMenu {
 				int input = sc.nextInt();
 				sc.nextLine();
 
-				// TODO added calls to each menu choice
+				// TODO add menu calls for each choice
 				switch (input) {
 				case 1:
 					printProducts();
+					System.out.println("Hit enter to return");
+					sc.nextLine();
 					continue;
 				case 2:
-					System.out.println("Called: " + input);
+					SearchProductMenu.run(sc);
 					continue;
 				case 3:
 					System.out.println("Called: " + input);
@@ -72,5 +79,12 @@ public class MainMenu {
 		}
 	}
 
-	
+	static void run(Scanner sc, User user) {
+		if (user != null && user.role.equals("user"))
+			userMenuLoop(sc, user);
+		else if (user != null && user.role.equals("admin"))
+			adminMenuLoop(sc, user);
+
+	}
+
 }
