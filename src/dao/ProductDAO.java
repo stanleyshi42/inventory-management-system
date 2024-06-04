@@ -8,6 +8,30 @@ import model.Product;
 
 public class ProductDAO {
 
+	// Create queries
+	public static boolean addProduct(float price, int quantity, String name) {
+
+		if (price < 0 || quantity < 0)
+			return false;
+
+		try {
+			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO product (price, quantity, name) VALUES (?, ?, ?)");
+			preparedStatement.setFloat(1, price);
+			preparedStatement.setInt(2, quantity);
+			preparedStatement.setString(3, name);
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
 	// Read queries
 	public static ArrayList<Product> getAllProducts() {
 		ArrayList<Product> products = new ArrayList<>();
@@ -19,7 +43,7 @@ public class ProductDAO {
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				int price = rs.getInt("price");
+				float price = rs.getFloat("price");
 				int quantity = rs.getInt("quantity");
 				String name = rs.getString("name");
 				products.add(new Product(id, price, quantity, name));
@@ -27,7 +51,6 @@ public class ProductDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 
 		return products;
@@ -44,14 +67,13 @@ public class ProductDAO {
 
 			if (rs.next()) {
 				int id = rs.getInt("id");
-				int price = rs.getInt("price");
+				float price = rs.getFloat("price");
 				int quantity = rs.getInt("quantity");
 				product = new Product(id, price, quantity, name);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 
 		return product;
@@ -68,7 +90,7 @@ public class ProductDAO {
 			ResultSet rs = preparedstatement.executeQuery();
 
 			if (rs.next()) {
-				int price = rs.getInt("price");
+				float price = rs.getFloat("price");
 				int quantity = rs.getInt("quantity");
 				String name = rs.getString("name");
 				product = new Product(id, price, quantity, name);
@@ -76,7 +98,6 @@ public class ProductDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
 
 		return product;
