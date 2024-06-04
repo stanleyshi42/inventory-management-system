@@ -19,6 +19,8 @@ public class AddSaleMenu {
 			
 			if(SaleDAO.addSale(idInput, quantityInput))
 				System.out.println("Sale successfully recorded");
+			else
+				System.out.println("Operation failed");
 
 			System.out.println("Hit enter to return");
 			sc.nextLine();
