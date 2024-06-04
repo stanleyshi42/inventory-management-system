@@ -1,14 +1,24 @@
-package inventoryManagementSystem;
+package menu;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import dao.ProductDAO;
 import dao.UserDAO;
 import model.*;
 
 public class MainMenu {
 
 	Scanner sc = new Scanner(System.in);
+
+	private void printProducts() {
+		ArrayList<Product> products = ProductDAO.getAllProducts();
+
+		for (Product p : products) {
+			System.out.println(p);
+		}
+	}
 
 	private void adminMenuLoop(User user) {
 		// TODO
@@ -28,30 +38,26 @@ public class MainMenu {
 		while (true) {
 			System.out.println("1. View products");
 			System.out.println("2. Add products");
-			System.out.println("3. Remove product");
-			System.out.println("4. Record sale");
-			System.out.println("5. Logout");
+			System.out.println("3. Record sale");
+			System.out.println("4. Logout");
 
 			try {
 				int input = sc.nextInt();
 				sc.nextLine();
 
-				// TODO
+				// TODO added calls to each menu choice
 				switch (input) {
 				case 1:
-					System.out.println("Called: " + input);
-					break;
+					printProducts();
+					continue;
 				case 2:
 					System.out.println("Called: " + input);
-					break;
+					continue;
 				case 3:
 					System.out.println("Called: " + input);
-					break;
+					continue;
 				case 4:
-					System.out.println("Called: " + input);
-					break;
-				case 5:
-					return;
+					return; // Return to login menu
 				default:
 					System.out.println("Invalid input");
 				}
@@ -69,6 +75,7 @@ public class MainMenu {
 	}
 
 	private void loginMenu() {
+
 		while (true) {
 			try {
 				System.out.println("~~~Inventory Management System 9000~~~");
