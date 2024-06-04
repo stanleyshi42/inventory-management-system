@@ -22,7 +22,7 @@ public class LoginMenu {
 				// Authenticate and log in
 				if (UserDAO.authenticateUser(username, password)) {
 					User user = UserDAO.getUser(username);
-					if (user != null && user.role.equals("user"))
+					if (user != null)
 						MainMenu.run(sc, user);
 				} else
 					System.out.println("Login failed");
