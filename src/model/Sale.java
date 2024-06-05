@@ -15,4 +15,10 @@ public class Sale {
 		this.timestamp = timestamp;
 	}
 
+	@Override
+	public String toString() {
+		return "Sale [id=" + id + ", product_id=" + product_id + ", quantity=" + quantity + ", timestamp=" + timestamp
+				+ "]";
+	}
+
 }

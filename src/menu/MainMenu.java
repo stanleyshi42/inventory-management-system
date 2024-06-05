@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dao.ProductDAO;
+import dao.SaleDAO;
 import model.*;
 
 public class MainMenu {
@@ -17,9 +18,16 @@ public class MainMenu {
 		}
 	}
 
+	static private void printSales() {
+		ArrayList<Sale> sales = SaleDAO.getAllSales();
+
+		for (Sale s : sales) {
+			System.out.println(s);
+		}
+	}
+
 	static void adminMenuLoop(Scanner sc, User user) {
 
-		// TODO admin menu
 		System.out.println("ADMIN MODE");
 		while (true) {
 			System.out.println("1. View products");
@@ -48,7 +56,9 @@ public class MainMenu {
 					AddSaleMenu.run(sc);
 					continue;
 				case 4:
-					System.out.println("Not implemented yet");
+					printSales();
+					System.out.println("Hit enter to return");
+					sc.nextLine();
 					continue;
 				case 5:
 					AddProductMenu.run(sc);
@@ -104,8 +114,9 @@ public class MainMenu {
 					AddSaleMenu.run(sc);
 					continue;
 				case 4:
-					// TODO view sales record
-					System.out.println("Not implemented yet");
+					printSales();
+					System.out.println("Hit enter to return");
+					sc.nextLine();
 					continue;
 				case 5:
 					return; // Return to login menu
