@@ -17,7 +17,7 @@ public class UpdateProductMenu {
 			Product product = ProductDAO.getProduct(idInput);
 
 			if (product == null) {
-				System.out.println("Operation failed: invalid ID");
+				System.out.println("Operation failed: product not found");
 
 			} else {
 				System.out.println("Enter new price:");

@@ -7,12 +7,12 @@ import menu.Helper;
 import model.*;
 
 public class DbInitializer {
-	
+
+	// Call this to drop all tables and recreate them
 	public static void main(String[] args) {
 		init();
 	}
 
-	// Delete and set up all tables
 	public static void init() {
 		initProductTable();
 		initUserTable();
