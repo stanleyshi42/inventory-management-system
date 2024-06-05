@@ -32,6 +32,9 @@ public class LoginMenu {
 			System.out.println("Password:");
 			String password = sc.nextLine();
 
+			username = username.trim();
+			password = password.trim();
+
 			if (!LoginMenu.validateUsername(username)) {
 				return;
 			}

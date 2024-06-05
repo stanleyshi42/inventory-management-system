@@ -142,11 +142,12 @@ public class MainMenu {
 	}
 
 	static void run(Scanner sc, User user) {
-		if (user != null && user.role.equals("user"))
-			userMenuLoop(sc, user);
-		else if (user != null && user.role.equals("admin"))
+		if (user != null && user.role.equals("admin"))
 			adminMenuLoop(sc, user);
-
+		else if (user != null)
+			userMenuLoop(sc, user);
+		else
+			System.out.println("Error: invalid user");
 	}
 
 }
