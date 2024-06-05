@@ -20,6 +20,8 @@ public class ProductDAOTest {
 		int testQuantity = 11;
 		String testName = "Test";
 
+		assertFalse(ProductDAO.addProduct(-1, testQuantity, testName));
+		assertFalse(ProductDAO.addProduct(testPrice, -1, testName));
 		assertTrue(ProductDAO.addProduct(testPrice, testQuantity, testName));
 
 		// Test read

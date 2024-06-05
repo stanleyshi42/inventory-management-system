@@ -13,17 +13,23 @@ public class MainMenu {
 	static private void printProducts() {
 		ArrayList<Product> products = ProductDAO.getAllProducts();
 
-		for (Product p : products) {
-			System.out.println(p);
-		}
+		if (products.size() == 0)
+			System.out.println("No products to display");
+		else
+			for (Product p : products) {
+				System.out.println(p);
+			}
 	}
 
 	static private void printSales() {
 		ArrayList<Sale> sales = SaleDAO.getAllSales();
 
-		for (Sale s : sales) {
-			System.out.println(s);
-		}
+		if (sales.size() == 0)
+			System.out.println("No sales to display");
+		else
+			for (Sale s : sales) {
+				System.out.println(s);
+			}
 	}
 
 	static void adminMenuLoop(Scanner sc, User user) {
@@ -32,8 +38,8 @@ public class MainMenu {
 		while (true) {
 			System.out.println("1. View products");
 			System.out.println("2. Search products");
-			System.out.println("3. Record sale");
-			System.out.println("4. View sales record");
+			System.out.println("3. View sales record");
+			System.out.println("4. Record sale");
 			System.out.println("5. Add product");
 			System.out.println("6. Update product");
 			System.out.println("7. Delete product");
@@ -93,8 +99,8 @@ public class MainMenu {
 		while (true) {
 			System.out.println("1. View products");
 			System.out.println("2. Search products");
-			System.out.println("3. Record sale");
-			System.out.println("4. View sales record");
+			System.out.println("3. View sales record");
+			System.out.println("4. Record sale");
 			System.out.println("5. Logout");
 
 			try {
@@ -127,7 +133,6 @@ public class MainMenu {
 			} catch (InputMismatchException e) {
 				System.out.println("Invalid input");
 				sc.nextLine(); // Clear invalid input
-
 			} catch (Exception e) {
 				e.printStackTrace();
 

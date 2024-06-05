@@ -16,8 +16,7 @@ public class ProductDAO {
 
 		try {
 			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO product (price, quantity, name) VALUES (?, ?, ?)");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO product (price, quantity, name) VALUES (?, ?, ?)");
 			preparedStatement.setFloat(1, price);
 			preparedStatement.setInt(2, quantity);
 			preparedStatement.setString(3, name);
