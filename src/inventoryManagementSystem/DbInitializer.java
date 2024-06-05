@@ -32,8 +32,7 @@ public class DbInitializer {
 						id INT PRIMARY KEY AUTO_INCREMENT,
 						price FLOAT UNSIGNED NOT NULL,
 						quantity INT UNSIGNED NOT NULL,
-						name VARCHAR(255) NOT NULL,
-						description VARCHAR(255)
+						name VARCHAR(255) NOT NULL
 					)
 					""");
 
