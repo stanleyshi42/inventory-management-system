@@ -35,13 +35,15 @@ public class ProductDAO {
 	// Read queries
 	public static ArrayList<Product> getAllProducts() {
 
-		ArrayList<Product> products = new ArrayList<>();
+		ArrayList<Product> products = null;
 
 		try {
 			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM product");
-			
+
+			products = new ArrayList<>();
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				float price = rs.getFloat("price");
