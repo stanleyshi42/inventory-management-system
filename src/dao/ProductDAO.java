@@ -41,7 +41,7 @@ public class ProductDAO {
 			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM product");
-
+			
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				float price = rs.getFloat("price");

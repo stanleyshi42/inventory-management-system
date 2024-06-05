@@ -25,7 +25,7 @@ public class DbInitializer {
 			Connection connection = DriverManager.getConnection(Helper.DB_URL, Helper.DB_USER, Helper.DB_PASSWORD);
 			Statement statement = connection.createStatement();
 
-			statement.execute("DROP TABLE IF EXISTS product"); // TODO delete
+			statement.execute("DROP TABLE IF EXISTS product");
 
 			statement.execute("""
 					CREATE TABLE IF NOT EXISTS product (
